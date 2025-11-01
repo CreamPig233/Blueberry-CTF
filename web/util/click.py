@@ -162,7 +162,10 @@ SELECT task.*, s.point FROM s JOIN task ON s.task_id = task.id
 
 @click.command("erase-db")
 def erase_db():
-    do_erase_db()
+    try:
+        do_erase_db()
+    finally:
+        db_pool.close()
 
 def do_init_db():
     print("Init database...")
@@ -263,4 +266,7 @@ def check(s):
 
 @click.command("init-db")
 def init_db():
-    do_init_db()
+    try:
+        do_init_db()
+    finally:
+        db_pool.close()
