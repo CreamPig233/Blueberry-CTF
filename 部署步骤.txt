@@ -1,0 +1,77 @@
+# 更新系统
+sudo apt update && sudo apt upgrade -y
+sudo apt autoremove -y
+
+# 设置时区（可选，建议设置为比赛所在地时区）
+sudo timedatectl set-timezone Asia/Shanghai
+
+# 安装基础依赖
+sudo apt install -y nginx docker-compose tmux curl git
+
+# 安装 Python 和相关依赖
+sudo apt install -y python3 python3-pip python3-dotenv python3-flask \
+python3-psycopg-pool python3-passlib python3-psutil python3-gevent \
+python3-rich python3-pycryptodome gunicorn python3-docker python3-bs4
+
+# 安装 Docker（如果系统中没有）
+sudo apt install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+
+# 将当前用户添加到 docker 组（避免每次使用 sudo）
+sudo usermod -aG docker $USER
+# 注意：需要重新登录或执行 newgrp docker 使更改生效
+
+# 提高系统 AIO 限制（对于数据库性能很重要）
+echo 'fs.aio-max-nr=1048576' | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+
+# 如果需要，可以进一步优化系统性能
+echo 'net.core.somaxconn=65535' | sudo tee -a /etc/sysctl.conf
+echo 'vm.overcommit_memory=1' | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+
+# 克隆仓库（如果还没有）
+cd ~
+git clone https://github.com/CreamPig233/Blueberry-CTF.git
+cd ~/Blueberry-CTF
+
+# 初始化平台
+sudo python3 platform-init.py
+
+vadmin user: lilac
+password: PcFrQKj16PeLLg
+
+# 配置nginx
+# 备份原有配置
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
+
+# 复制 Blueberry CTF 的 nginx 配置
+sudo cp conf/nginx_site.conf /etc/nginx/sites-available/default
+
+# 测试配置语法
+sudo nginx -t
+
+# 重新加载 nginx
+sudo nginx -s reload
+
+# 如果遇到权限问题，确保 nginx 用户有权访问相关目录
+sudo systemctl restart nginx
+
+
+#启动后台服务
+
+tmux new-session -d -s blueberry
+
+# 进入 web 目录并启动 gunicorn
+tmux new-window -t blueberry:1 -n 'web'
+tmux send-keys -t blueberry:1 'cd ~/Blueberry-CTF/web' Enter
+tmux send-keys -t blueberry:1 'sudo gunicorn app:app -b 0.0.0.0:11451 -w 4 -k gevent' Enter
+
+# 创建另一个窗口用于后端服务
+tmux new-window -t blueberry:2 -n 'backend'
+tmux send-keys -t blueberry:2 'cd ~/Blueberry-CTF/web' Enter
+tmux send-keys -t blueberry:2 'sudo python3 backend.py' Enter
+
+# 查看运行状态
+tmux attach -t blueberry

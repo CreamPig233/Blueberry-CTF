@@ -96,6 +96,9 @@ from blueprints import api
 
 app.register_blueprint(api.bp)
 
+from blueprints import cas
+
+app.register_blueprint(cas.bp)
 
 from util.click import erase_db, init_db
 

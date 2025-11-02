@@ -21,6 +21,7 @@
         <button class="ui button" type="submit">Submit</button>
 
         <p>Have no account? <a href="{{url_for('user.show_register')}}">Register <i class="external link icon"></i></a></p>
+        <p>或者<a href="{{ url_for('cas.cas_login') }}">使用东北大学统一认证登录</a></p>
     </form>
 
     <script>
@@ -34,6 +35,7 @@
             ;
     </script>
 </div>
+
 
 
 {% endblock %}
