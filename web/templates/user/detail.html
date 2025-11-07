@@ -17,7 +17,7 @@
                     <div class="content">
                         <div class="header">{{u.username}}</div>
                         <div class="meta">
-                            <span class="date">Joined on {{u.register_time}}</span>
+                            <span class="date">注册时间 {{u.register_time}}</span>
                         </div>
                         <div class="description">
                             
@@ -26,38 +26,38 @@
                     <div class="extra content">
                         <div>
                             <i class="tasks icon"></i>
-                            {{g.solve_cnt}} tasks solved
+                            解决了 {{g.solve_cnt}} 个任务
                         </div>
                         <div>
                             <i class="gg icon"></i>
-                            {{g.total_point}} points
+                            共 {{g.total_point}} 分
                         </div>
                         {% if g.is_admin %}
                         <div>
                             <i class="blue tools icon"></i>
-                            <a href="{{url_for('admin.show_user_detail', uid=u.id)}}" class="ui blue text">User detail</a>
+                            <a href="{{url_for('admin.show_user_detail', uid=u.id)}}" class="ui blue text">用户详细信息</a>
                         </div>
                         {% endif %}
                     </div>
                 </div>
             </div>
             <div class="twelve wide column">
-                <h3># Accepted submits</h3>
+                <h3># 提交历史</h3>
                 <div class="ui divider hidden"></div>
 
                 <table class="ui fixed very basic single line table">
                     <thead>
                         <tr>
-                            <th class="three wide">Task</th>
-                            <th class="two wide">Points</th>
-                            <th class="four wide">Submit time</th>
+                            <th class="three wide">任务</th>
+                            <th class="two wide">分数</th>
+                            <th class="four wide">提交时间</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for s in g.solves %}
                         <tr>
                             <div style="display: none">#{{s.task_id}}</div>
-                            <td><a href="{{url_for('problem.show_problem_detail', pid=s.problem_id)}}">{{s.title}}</a><span class="ui grey text"> - Task {{s.task_order}}</span></td>
+                            <td><a href="{{url_for('problem.show_problem_detail', pid=s.problem_id)}}">{{s.title}}</a><span class="ui grey text"> - 任务 #{{s.task_order}}</span></td>
                             <td>{{s.point}}</td>
                             <td>{{s.submit_time}}</td>
                         </tr>

@@ -12,15 +12,15 @@
             <h1 class="ui header" style="margin: 0"><span>{{'<span class="ui red text">[hidden] </span>' | safe if not p.is_visible}}{{p.title}}</span>
                 <div class="sub header">
                     <div class="ui horizontal list">
-                        <div class="item">Problem ID: {{p.id}}</div>
-                        <div class="item">Solves:
+                        <div class="item">题目 ID: {{p.id}}</div>
+                        <div class="item">解出人数:
                             {% for t in g.solves %}
                             {% if loop.index != 1 %} / {% endif %}
                             <a onclick="javascript:show_solver('#solver-task-{{t[0]}}')">{{t[1]['cnt']}}</a>
 
                             <div class="ui mini modal" id="solver-task-{{t[0]}}">
                                 <div class="header">
-                                    Solvers for task #{{loop.index}}
+                                    解出任务 #{{loop.index}} 的人
                                 </div>
 
                                 <div class="content">
@@ -59,14 +59,14 @@
         </div>
         <div class="ui tiny statistic">
             <div class="value">{{g.solved_points}} / {{g.total_points}}</div>
-            <div class="label">Points</div>
+            <div class="label">分数</div>
         </div>
     </div>
 
     <div class="ui divider" style="margin-bottom: 1.5rem;"></div>
 
     <div>
-        <h3><i class="primary disabled paragraph icon"></i>Description</h3>
+        <h3><i class="primary disabled paragraph icon"></i>描述</h3>
         <div class="markd">{{p.description}}</div>
     </div>
 
@@ -77,7 +77,7 @@
     {% if g.files %}
     <div class="ui divider hidden"></div>
     <div>
-        <h3><i class="primary disabled paragraph icon"></i>Files</h3>
+        <h3><i class="primary disabled paragraph icon"></i>文件</h3>
         <div class="ui list">
             {% for f in g.files%}
             <div class="item">
@@ -97,13 +97,13 @@
     {% if p.instance_type != 'none' %}
     <div class="ui divider hidden"></div>
     <div>
-        <h3><i class="primary disabled paragraph icon"></i>Instance</h3>
+        <h3><i class="primary disabled paragraph icon"></i>解题容器</h3>
         <div>
             {% if p.instance_type == 'shared' %}
             {% if g.instance %}
             {{g.instance.connection_info | replace('platform_ip', request.host.split(":")[0])}}
             {% else %}
-            <i class="red times icon"></i>Instance not launched, please contact admin.
+            <i class="red times icon"></i>解题容器启动失败，请联系管理员。
             {% endif %}
 
             {% elif p.instance_type == 'private' %}
@@ -138,7 +138,7 @@
                 {% if g.instance.status == "pending" %}
                 {% set is_show_launch = False %}
                 <div class="item" style="text-align: center">
-                    <p><i class="notched grey circle loading icon"></i> Pending...</p>
+                    <p><i class="notched grey circle loading icon"></i> 请稍等...</p>
                 </div>
 
                 <script>check_status();</script>
@@ -146,7 +146,7 @@
                 {% set is_show_launch = False %}
                 {% if g.instance.end_time < g.warning_time %}
                 <div class="item" style="text-align: center">
-                    <p><i class="notched grey circle loading icon"></i> Destroying...</p>
+                    <p><i class="notched grey circle loading icon"></i> 销毁中...</p>
                 </div>
 
             <script>check_status();</script>
@@ -155,10 +155,10 @@
             {% set target = g.instance.connection_info | replace('platform_ip', request.host.split(":")[0]) %}
             <div class="ui action input fluid">
                 <input id="instance_input" type="text" value="{{target}}" style="font-weight: bold;" readonly />
-                <button class="ui teal right icon button no-invert" data-tooltip="Copy to Clipboard" onclick="copyToClipboard()">
+                <button class="ui teal right icon button no-invert" data-tooltip="复制到剪贴板" onclick="copyToClipboard()">
                     <i class="copy icon"></i>
                 </button>
-                <a class="ui teal right icon button no-invert" data-tooltip="Open in New Tab" href="http://{{target}}" target="_blank">
+                <a class="ui teal right icon button no-invert" data-tooltip="在新标签页中打开" href="http://{{target}}" target="_blank">
                     <i class="external alternate icon"></i>
                 </a>
             </div>
@@ -196,7 +196,7 @@
                         .progress({ percent })
 
                     $("#instance_progress .label")
-                        .html("Valid: " + formatTime(end_time - now_time) + ' <a class="ui link" href="{{url_for('api.extend_instance_time', pid=p.id)}}"> [+1h!]</a>')
+                        .html("剩余可用时间: " + formatTime(end_time - now_time) + ' <a class="ui link" href="{{url_for('api.extend_instance_time', pid=p.id)}}">  [延长一小时!]</a>')
                 }
                 updateTimeProgress()
                 setInterval(updateTimeProgress, 1000)
@@ -215,11 +215,11 @@
         {% endif %}
 
         {% if is_show_launch %}
-        <button class="ui button" onclick="window.location.href = '{{url_for("api.launch_instance", pid=p.id)}}' ">Get an instance</button>
+        <button class="ui button" onclick="window.location.href = '{{url_for("api.launch_instance", pid=p.id)}}' ">创建解题容器</button>
         {% endif %}
 
         {% if is_show_destroy %}
-        <button class=" ui button" onclick="window.location.href = '{{url_for("api.destroy_instance", pid=p.id)}}'">Destroy</button>
+        <button class=" ui button" onclick="window.location.href = '{{url_for("api.destroy_instance", pid=p.id)}}'">销毁</button>
         {% endif %}
 
         {% endif %}
@@ -237,20 +237,20 @@
             <div class="ui labeled fluid action input">
                 {% if g.tasks|length != 1 %}
                 <div class="ui label">
-                    Task #{{task.id_in_problem}} /
-                    <span class="ui black text">{{task.point}}p</span>
+                    任务 #{{task.id_in_problem}} /
+                    <span class="ui black text">{{task.point}} 分</span>
                 </div>
                 {% endif %}
 
                 {% if task.id not in g.accepted %}
-                <input type="text" name="flag" placeholder="flag{--------------------}" required>
-                <button class="ui primary button" type="submit">Submit</button>
+                <input type="text" name="flag" placeholder="请输入 Flag" required>
+                <button class="ui primary button" type="submit">提交</button>
                 {% else %}
                     <input type="text" name="flag" placeholder="Accepted" style="background-color: honeydew; " disabled>
                     {% if g.is_admin %}
-                    <div class="ui green button" onclick="window.location.href = '{{url_for('problem.reset_task_progress', pid=p.id, taskid=task.id)}}'">Reset</div>
+                    <div class="ui green button" onclick="window.location.href = '{{url_for('problem.reset_task_progress', pid=p.id, taskid=task.id)}}'">重置</div>
                     {% else %}
-                    <button class="ui disabled green button" type="submit">Submit</button>
+                    <button class="ui disabled green button" type="submit">提交</button>
                     {% endif %}
                 {% endif %}
             </div>

@@ -6,26 +6,26 @@
 
 <div class="ui segments">
     <div class="ui secondary segment">
-        General
+        通用
     </div>
 
     <div class="ui segment">
 
         <form class="ui form" method="post" action="{{url_for('admin.api_set_siteconfig')}}">
             <div class="field">
-                <label>Site name</label>
+                <label>网站名称</label>
                 <input type="text" name="site_name" value="{{site_config['site_name']}}">
             </div>
 
             <div class="field">
-                <label>Public registration</label>
+                <label>是否允许公开注册</label>
                 <div class="ui selection dropdown">
                     <input type="hidden" name="is_allow_register" value="{{site_config['is_allow_register']}}">
                     <i class="dropdown icon"></i>
-                    <div class="default text">Select</div>
+                    <div class="default text">请选择</div>
                     <div class="menu">
-                        <div class="item" data-value="yes"><i class="green lock open icon"></i>Allow new users</div>
-                        <div class="item" data-value="no"><i class="red lock icon"></i>Disallow new users</div>
+                        <div class="item" data-value="yes"><i class="green lock open icon"></i>允许注册</div>
+                        <div class="item" data-value="no"><i class="red lock icon"></i>禁止注册</div>
                     </div>
                 </div>
             </div>
@@ -44,43 +44,43 @@
             </div>
 
             <div class="field">
-                <label>Gravatar</label>
+                <label>头像</label>
                 <div class="ui selection dropdown">
                     <input type="hidden" name="use_gravatar" value="{{site_config['use_gravatar']}}">
                     <i class="dropdown icon"></i>
-                    <div class="default text">Select</div>
+                    <div class="default text">请选择</div>
                     <div class="menu">
-                        <div class="item" data-value="yes"><i class="green cloud icon"></i>Use gravatar</div>
-                        <div class="item" data-value="no"><i class="blue user icon"></i>Use default user avatar</div>
+                        <div class="item" data-value="yes"><i class="green cloud icon"></i>使用 Gravatar</div>
+                        <div class="item" data-value="no"><i class="blue user icon"></i>使用默认用户头像</div>
                     </div>
                 </div>
             </div>
 
             <div class="field">
-                <label>Contest starts at</label>
+                <label>比赛开始时间</label>
                 <div class="ui calendar" id="start_time">
                     <div class="ui fluid input left icon">
                       <i class="calendar icon"></i>
-                      <input type="text" name="start_time" placeholder="Date/Time" value="{{site_config['start_time']}}">
+                      <input type="text" name="start_time" placeholder="日期 / 时间" value="{{site_config['start_time']}}">
                     </div>
                 </div>
             </div>
 
             <div class="field">
-                <label>Contest ends at</label>
+                <label>比赛结束时间</label>
                 <div class="ui calendar" id="end_time">
                     <div class="ui fluid input left icon">
                       <i class="calendar icon"></i>
-                      <input type="text" name="end_time" placeholder="Date/Time" value="{{site_config['end_time']}}">
+                      <input type="text" name="end_time" placeholder="日期 / 时间" value="{{site_config['end_time']}}">
                     </div>
                 </div>
             </div>
 
             <div class="field">
-                <label>Tags to show below the search bar</label>
+                <label>在搜索框下面显示的标签</label>
                 <div class="ui fluid input left icon">
                     <i class="tags icon"></i>
-                    <input type="text" name="head_tags" placeholder="eg: web | pwn" value="{{site_config['head_tags']}}">
+                    <input type="text" name="head_tags" placeholder="例如: web | pwn" value="{{site_config['head_tags']}}">
                 </div>
             </div>
 
@@ -111,11 +111,11 @@
             </div>
 
             <div class="field">
-                <label>Max running containers for each player</label>
+                <label>每个用户可以同时运行的最大容器数</label>
                 <input type="text" name="player_max_container_num" value="{{site_config['player_max_container_num']}}">
             </div>
 
-            <button class="ui button labeled icon" type="submit"><i class="pen icon"></i>Update</button>
+            <button class="ui button labeled icon" type="submit"><i class="pen icon"></i>更新</button>
         </form>
 
         <script>
@@ -130,7 +130,7 @@
 
 <div class="ui segments">
     <div class="ui secondary segment">
-        Message board
+        公告板
     </div>
 
     <div class="ui segment">
@@ -141,7 +141,7 @@
                     rows="20">{{site_config['message_board']}}</textarea>
             </div>
 
-            <button class="ui button labeled icon" type="submit"><i class="pen icon"></i>Update</button>
+            <button class="ui button labeled icon" type="submit"><i class="pen icon"></i>更新</button>
         </form>
     </div>
 

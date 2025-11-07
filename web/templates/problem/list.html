@@ -6,7 +6,7 @@
 
 <div class="ui text container">
     <div class="ui fluid tiny icon input">
-        <input type="text" placeholder="Search..." id="search">
+        <input type="text" placeholder="搜索..." id="search">
         <i class="ui search icon"></i>
     </div>
 </div>
@@ -29,11 +29,11 @@
     <table class="ui basic selectable unstackable large table">
         <thead>
             <tr>
-                <th class="one wide">Status</th>
-                <th class="one wide">Points</th>
-                <th class="four wide">Problem</th>
-                <th class="eight wide">Tags</th>
-                <th class="two wide ">Solves</th>
+                <th class="two wide">状态</th>
+                <th class="one wide">分数</th>
+                <th class="seven wide">题目</th>
+                <th class="four wide">标签</th>
+                <th class="two wide ">解出人数</th>
             </tr>
         </thead>
         <tbody id="tablebody">
@@ -56,7 +56,7 @@
                 <td>
                     <span class="ui text" data-label="title">
                         <span style="color: lightgrey">A{{x.id}}. </span>
-                        {{'<span class="ui red text">[hidden] </span>' | safe if not x.is_visible}}
+                        {{'<span class="ui red text">[不可见] </span>' | safe if not x.is_visible}}
                         {{x.title}}
                         {{'<i class="ui primary docker icon"></i>' | safe if x.id in g.running_problems }}
                     </span>

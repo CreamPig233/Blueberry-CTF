@@ -72,7 +72,7 @@
         {% for x in get_flashed_messages(category_filter = ["error"]) %}
         $.toast({
             class: 'error',
-            title: 'Error',
+            title: '错误',
             displayTime: 0,
             message: "{{x}}"
         });
@@ -81,7 +81,7 @@
         {% for x in get_flashed_messages(category_filter = ["warning"]) %}
         $.toast({
             class: 'warning',
-            title: 'Fail',
+            title: '错误',
             displayTime: 10000,
             showProgress: 'bottom',
             message: "{{x}}"
@@ -91,7 +91,7 @@
         {% for x in get_flashed_messages(category_filter = ["success"]) %}
         $.toast({
             class: 'success',
-            title: 'Success',
+            title: '成功',
             showProgress: 'bottom',
             message: "{{x}}"
         });
@@ -99,7 +99,7 @@
 
         {% for x in get_flashed_messages(category_filter = ["info"]) %}
         $.toast({
-            title: 'Info',
+            title: '提示',
             showProgress: 'bottom',
             message: "{{x}}"
         });

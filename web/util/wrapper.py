@@ -7,7 +7,7 @@ def login_required(f):
         if g.user:
             return f(*args, **kwargs)
         else:
-            flash('Please login first!', 'warning')
+            flash('请先登录！', 'warning')
             return redirect(url_for('user.show_login', next=request.path))
     return decorated_function
 

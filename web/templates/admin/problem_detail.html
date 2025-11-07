@@ -8,21 +8,21 @@
 
 <div class="ui segments">
     <div class="ui secondary segment">
-        <i class="info icon"></i>Basic info
+        <i class="info icon"></i>基础信息
     </div>
 
     <div class="ui segment">
         <form class="ui form" method="post" action="{{url_for('admin.api_modify_problem', pid=info.id)}}">
             <div class="field">
-              <label>Title</label>
+              <label>标题</label>
               <input type="text" name="title" value="{{info.title}}">
             </div>
             <div class="field">
-              <label>Description</label>
+              <label>描述</label>
               <textarea name="description">{{info.description}}</textarea>
             </div>
             <div class="field">
-                <label>Tag</label>
+                <label>标签</label>
                 <input type="text" name="tag" value="{{info.tag or ''}}">
               </div>
             
@@ -44,25 +44,25 @@
 
 
             <div class="field">
-                <label>Docker config</label>
+                <label>Docker 配置</label>
                 <input type="text" name="docker_config" value="{{info.docker_config}}">
             </div>
 
             <div class="field">
-                <label>Visible</label>
+                <label>可见性</label>
                 <div class="ui selection dropdown">
                     <input type="hidden" name="visible" value="{{info.is_visible}}">
                     <i class="dropdown icon"></i>
                     <div class="default text">Select</div>
                     <div class="menu">
-                        <div class="item" data-value="True"><i class="green eye icon"></i>Visible</div>
-                        <div class="item" data-value="False"><i class="red eye slash icon"></i>Hidden</div>
+                        <div class="item" data-value="True"><i class="green eye icon"></i>可见</div>
+                        <div class="item" data-value="False"><i class="red eye slash icon"></i>不可见</div>
                     </div>
                 </div>
             </div>
 
-            <button class="ui primary button labeled icon" type="submit"><i class="pen icon"></i>Update</button>
-            <div class="ui red button labeled icon" onclick="window.location.href='{{url_for('admin.api_remove_problem', pid=info.id)}}'"><i class="delete icon"></i>Delete</div>
+            <button class="ui primary button labeled icon" type="submit"><i class="pen icon"></i>更新</button>
+            <div class="ui red button labeled icon" onclick="window.location.href='{{url_for('admin.api_remove_problem', pid=info.id)}}'"><i class="delete icon"></i>删除</div>
 
         </form>
     </div>
@@ -71,32 +71,32 @@
 
 <div class="ui segments">
     <div class="ui secondary segment">
-        <i class="tasks icon"></i>Tasks
+        <i class="tasks icon"></i>任务
     </div>
 
     {% for t in g.tasks %}
 
     <div class="ui segment">
         <div class="ui header">
-            Task #{{loop.index}} <span class="ui horizontal label">TaskID: {{t.id}}</span>
+            Task #{{loop.index}} <span class="ui horizontal label">任务 ID: {{t.id}}</span>
         </div>
         <form class="ui form"  method="post" action="{{url_for('admin.api_modify_task', tid=t.id)}}">
             <input type="text" name="task_id" value="{{t.id}}" hidden>
 
             <div class="field">
-              <label>Base point</label>
+              <label>基础分数</label>
               <input type="text" name="point" value="{{t.base_point}}" required>
             </div>
             <div class="field">
-                <label>Score calc type</label>
+                <label>分数计算方式</label>
 
                 <div class="ui selection dropdown">
                     <input type="hidden" name="score_calc_type" value="{{t.score_calc_type}}">
                     <i class="dropdown icon"></i>
                     <div class="default text">Select</div>
                     <div class="menu">
-                        <div class="item" data-value="0"><i class="green grip lines icon"></i>Static Points</div>
-                        <div class="item" data-value="1"><i class="blue chartline icon"></i>Dynamic Points - Score decreases with more solvers</div>
+                        <div class="item" data-value="0"><i class="green grip lines icon"></i>固定分数</div>
+                        <div class="item" data-value="1"><i class="blue chartline icon"></i>动态积分 - 得分随解题人数增加而减少</div>
                     </div>
                 </div>
             </div>
@@ -104,9 +104,9 @@
               <label>Checker</label>
               <textarea name="checker" style="font-family: Consolas;" rows="3">{{t.checker}}</textarea>
               <div style="padding-top: 0.5rem">
-                Templates: 
-                <div class="ui green tertiary button" onclick="fill_static_template(this)">Static flag</div>
-                <div class="ui violet tertiary button" onclick="fill_dynamic_template(this)">Dynamic flag</div>
+                预设: 
+                <div class="ui green tertiary button" onclick="fill_static_template(this)">固定 Flag</div>
+                <div class="ui violet tertiary button" onclick="fill_dynamic_template(this)">动态 Flag</div>
               </div>
             </div>
 
@@ -120,24 +120,24 @@
 
     <div class="ui segment">
         <div class="ui header">
-            Add task
+            添加任务
         </div>
         <form class="ui form"  method="post" action="{{url_for('admin.api_add_task', pid=info.id)}}">
             <div class="field">
-              <label>Base point</label>
+              <label>基础分数</label>
               <input type="text" name="point" placeholder=" " required>
             </div>
             <div class="field">
               <label>Checker</label>
-              <textarea name="checker" style="font-family: Consolas;" rows="3" placeholder="Provide a function `check(flag)`" required></textarea>
+              <textarea name="checker" style="font-family: Consolas;" rows="3" placeholder="提供一个 `check(flag)` 函数" required></textarea>
               <div style="padding-top: 0.5rem">
-                Templates: 
-                <div class="ui green tertiary button" onclick="fill_static_template(this)">Static flag</div>
-                <div class="ui violet tertiary button" onclick="fill_dynamic_template(this)">Dynamic flag</div>
+                预设: 
+                <div class="ui green tertiary button" onclick="fill_static_template(this)">固定 Flag</div>
+                <div class="ui violet tertiary button" onclick="fill_dynamic_template(this)">动态 Flag</div>
               </div>
             </div>
 
-            <button class="ui green button labeled icon" type="submit"><i class="plus icon"></i>Add</button>
+            <button class="ui green button labeled icon" type="submit"><i class="plus icon"></i>添加</button>
         </form>
     </div>
 </div>
@@ -155,17 +155,17 @@ function fill_dynamic_template(dom) {
 
 <div class="ui segments">
     <div class="ui secondary segment">
-        <i class="file icon"></i>Files
+        <i class="file icon"></i>文件
     </div>
 
     <div class="ui segment">
         <table class="ui very basic fixed single line table">
             <thead>
                 <tr>
-                    <th class="one wide">Filename</th>
-                    <th class="one wide">Upload time</th>
-                    <th class="two wide">Download key</th>
-                    <th class="one wide">Action</th>
+                    <th class="one wide">文件名</th>
+                    <th class="one wide">上传时间</th>
+                    <th class="two wide">下载 key</th>
+                    <th class="one wide">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -175,7 +175,7 @@ function fill_dynamic_template(dom) {
                         class="download icon"></i>{{f.filename}}</a></td>
                     <td>{{f.upload_time}}</td>
                     <td>{{f.download_key}}</td>
-                    <td><a style="color:coral" href="{{url_for('admin.api_remove_file', fid=f.id)}}"><i class="circle minus icon"></i>Remove</a></td>
+                    <td><a style="color:coral" href="{{url_for('admin.api_remove_file', fid=f.id)}}"><i class="circle minus icon"></i>删除</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -189,7 +189,7 @@ function fill_dynamic_template(dom) {
                     </div>
                 </div>
         
-                <button class="ui primary button" type="submit">Upload</button>
+                <button class="ui primary button" type="submit">上传</button>
             </div>
         </form>
     

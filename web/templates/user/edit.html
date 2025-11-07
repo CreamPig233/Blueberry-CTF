@@ -5,38 +5,38 @@
 {% block basic %}
 <div class="ui text container">
     <h2 class="ui header">
-        # Profile
+        # 个人信息
     </h2>
 
     <table class="ui very basic single line table">
         <tbody>
             <tr>
-                <td class="two wide">ID</td>
+                <td class="two wide">用户 ID</td>
                 <td>{{g.user.id}}</td>
             </tr>
             <tr>
-                <td class="two wide">Username</td>
+                <td class="two wide">用户名</td>
                 <td>{{g.user.username}}</td>
             </tr>
             <tr>
                 {% if config['USE_GRAVATAR'] == 'yes' %}
                 <td class="two wide"><a href="https://en.gravatar.com/">Gravatar</a></td>
                 {% else %}
-                <td class="two wide">Avatar</td>
+                <td class="two wide">头像</td>
                 {% endif %}
                 <td><img class="ui avatar image" src="{{avatar_url(g.user, 64)}}" alt="avatar"></td>
             </tr>
             <tr>
-                <td class="two wide">Email</td>
+                <td class="two wide">邮箱</td>
                 <td>{{g.user.email}}</td>
             </tr>
             <tr>
-                <td class="two wide">Registration</td>
+                <td class="two wide">注册时间</td>
                 <td>{{g.user.register_time}}</td>
             </tr>
 
             <tr>
-                <td class="two wide">Extra</td>
+                <td class="two wide">额外信息</td>
                 <td>{{g.user.extra_info}}</td>
             </tr>
 
@@ -44,24 +44,24 @@
     </table>
 
     <h2 class="ui header">
-        # Modify password
+        # 修改密码
     </h2>
 
     <form class="ui form" method="post" id="pwdform">
         <div class="field">
-            <label>Current password</label>
+            <label>当前密码</label>
             <input type="password" name="originpassword">
         </div>
         <div class="field">
-            <label>New password</label>
-            <input type="password" name="newpassword" placeholder="At least 8 characters">
+            <label>新密码</label>
+            <input type="password" name="newpassword" placeholder="至少 8 个字符">
         </div>
         <div class="field">
-            <label>New password confirm</label>
-            <input type="password" name="newpassword2" placeholder="At least 8 characters">
+            <label>确认新密码</label>
+            <input type="password" name="newpassword2" placeholder="至少 8 个字符">
         </div>
 
-        <button class="ui button" type="submit">Submit</button>
+        <button class="ui button" type="submit">提交</button>
     </form>
 
     <script>

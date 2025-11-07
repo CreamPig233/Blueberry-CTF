@@ -6,34 +6,34 @@
 
 <div class="ui text container">
     <h2 class="ui header">
-        # Register
+        # 注册
     </h2>
     <form class="ui form" method="post" id="regform">
         <div class="field">
-            <label>Username</label>
+            <label>用户名</label>
             <input type="text" name="username" placeholder="">
         </div>
         <div class="field">
-            <label>Email</label>
+            <label>邮箱</label>
             <input type="email" name="email" placeholder="">
         </div>
         <div class="field">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="At least 8 characters">
+            <label>密码</label>
+            <input type="password" name="password" placeholder="至少 8 个字符">
         </div>
         <div class="field">
-            <label>Password confirm</label>
-            <input type="password" name="password2" placeholder="At least 8 characters">
+            <label>确认密码</label>
+            <input type="password" name="password2" placeholder="至少 8 个字符">
         </div>
 
         {% for x in g.extra %}
         <div class="field">
-            <label>Extra: {{x}}</label>
-            <input type="text" name="{{x}}" placeholder="Only admin can see it, will not shown to public" required>
+            <label>额外信息: {{x}}</label>
+            <input type="text" name="{{x}}" placeholder="只有管理员可以看见这里，对公众不可见" required>
         </div>
         {% endfor %}
 
-        <button class="ui button" type="submit">Submit</button>
+        <button class="ui button" type="submit">提交</button>
 
     </form>
 

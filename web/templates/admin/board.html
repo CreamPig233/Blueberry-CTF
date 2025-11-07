@@ -12,7 +12,7 @@
                     {{info.problem_num}}
                 </div>
                 <div class="label">
-                    <i class="book icon"></i>Problems
+                    <i class="book icon"></i>题目数
                 </div>
             </div>
             <div class="statistic">
@@ -20,7 +20,7 @@
                     {{info.task_num}}
                 </div>
                 <div class="label">
-                    <i class="tasks icon"></i>Tasks
+                    <i class="tasks icon"></i>任务数
                 </div>
             </div>
             <div class="statistic">
@@ -28,7 +28,7 @@
                     {{info.user_num}}
                 </div>
                 <div class="label">
-                    <i class="user icon"></i>Users
+                    <i class="user icon"></i>用户数
                 </div>
             </div>
             <div class="statistic">
@@ -36,7 +36,7 @@
                     {{info.submit_num}}
                 </div>
                 <div class="label">
-                    <i class="flag icon"></i>Submits
+                    <i class="flag icon"></i>提交次数
                 </div>
             </div>
             <div class="statistic">
@@ -44,7 +44,7 @@
                     {{info.solve_num}}
                 </div>
                 <div class="label">
-                    <i class="check icon"></i>Solves
+                    <i class="check icon"></i>解题次数
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
         <div class="bar">
             <div class="progress"></div>
         </div>
-        <div class="label">Memory {{mem.used // 1024 // 1024}} MB / {{mem.total // 1024 // 1024}} MB</div>
+        <div class="label">内存 {{mem.used // 1024 // 1024}} MB / {{mem.total // 1024 // 1024}} MB</div>
     </div>
 
     {% set disk = psutil.disk_usage('/') %}
@@ -82,7 +82,7 @@
         <div class="bar">
             <div class="progress"></div>
         </div>
-        <div class="label">Disk {{ disk.used // 1024 // 1024 // 1024}} GB / {{ disk.total // 1024 // 1024 // 1024}} GB</div>
+        <div class="label">磁盘 {{ disk.used // 1024 // 1024 // 1024}} GB / {{ disk.total // 1024 // 1024 // 1024}} GB</div>
     </div>
 
 </div>

@@ -8,14 +8,14 @@
 <div>
     <div class="ui segments">
         <div class="ui secondary segment">
-            <i class="user icon"></i>User info
+            <i class="user icon"></i>用户信息
         </div>
     
         <div class="ui segment">
             <table class="ui very basic fixed single line table">
                 <tbody>
                     <tr>
-                        <td class="two wide">ID</td>
+                        <td class="two wide">用户 ID</td>
                         <td>
                             {{g.info.id}}
                             {% if g.info.is_admin %}<i class='blue user secret icon'></i>{% endif %}
@@ -23,53 +23,53 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="two wide">Username</td>
+                        <td class="two wide">用户名</td>
                         <td>{{g.info.username}}</td>
                     </tr>
                     <tr>
-                        <td class="two wide">Email</td>
+                        <td class="two wide">邮箱</td>
                         <td>{{g.info.email}}</td>
                     </tr>
                     <tr>
-                        <td class="two wide">Register</td>
+                        <td class="two wide">注册时间</td>
                         <td>{{g.info.register_time}}</td>
                     </tr>
                     <tr>
-                        <td class="two wide">Extra info</td>
+                        <td class="two wide">额外信息</td>
                         <td>{{g.info.extra_info}}</td>
                     </tr>
                     <tr>
-                        <td class="two wide">Is admin?</td>
+                        <td class="two wide">是否为管理员?</td>
                         <td>
                             {% if g.info.is_admin %}
-                            <span class="ui primary horizontal label">Admin</span>
+                            <span class="ui primary horizontal label">管理员</span>
 
                             <a href="{{url_for('admin.api_unset_admin', uid=g.info.id)}}">
-                                <i class="times icon"></i>Unset
+                                <i class="times icon"></i>取消设置
                             </a>
                             {% else %}
-                            <span class="ui horizontal label">Not admin</span>
+                            <span class="ui horizontal label">非管理员</span>
 
                             <a href="{{url_for('admin.api_set_admin', uid=g.info.id)}}">
-                                <i class="tools icon"></i>Set
+                                <i class="tools icon"></i>设置为管理员
                             </a>
                             {% endif %}
                         </td>
                     </tr>
                     <tr>
-                        <td class="two wide">Is visible?</td>
+                        <td class="two wide">是否可见?</td>
                         <td>
                             {% if g.info.is_visible %}
-                            <span class="ui horizontal label">Visible</span>
+                            <span class="ui horizontal label">可见</span>
 
                             <a href="{{url_for('admin.api_unset_visible', uid=g.info.id)}}">
-                                <i class="eye slash icon"></i>Hide
+                                <i class="eye slash icon"></i>设置为不可见
                             </a>
                             {% else %}
-                            <span class="ui red horizontal label">Not visible</span>
+                            <span class="ui red horizontal label">不可见</span>
 
                             <a href="{{url_for('admin.api_set_visible', uid=g.info.id)}}">
-                                <i class="eye icon"></i>Unhide
+                                <i class="eye icon"></i>设置为可见
                             </a>
                             {% endif %}
                         </td>
@@ -84,8 +84,8 @@
         <table class="ui single line table">
             <thead>
                 <tr>
-                    <th>Task</th>
-                    <th>Submit time</th>
+                    <th>任务</th>
+                    <th>提交时间</th>
                     <th>Flag</th>
                 </tr>
             </thead>
@@ -93,7 +93,7 @@
                 {% for s in g.latest_submits %}
                 <tr>
                     <div style="display: none">#{{s.task_id}}</div>
-                    <td><a href="{{url_for('problem.show_problem_detail', pid=s.problem_id)}}">{{s.title}}</a><span class="ui grey text"> - Task {{s.task_order}}</span></td>
+                    <td><a href="{{url_for('problem.show_problem_detail', pid=s.problem_id)}}">{{s.title}}</a><span class="ui grey text"> - 任务 {{s.task_order}}</span></td>
                     <td>{{s.submit_time}}</td>
                     <td>
                         {% if s.is_accepted%}
