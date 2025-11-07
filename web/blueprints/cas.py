@@ -45,7 +45,7 @@ def login_from_neucas(username: str, password: str):
         return login_result
 
     if title_soup.text == "智慧东大--统一身份认证":
-        raise Exception("登录用户名或密码错误")
+        raise Exception("用户名或密码错误")
     elif title_soup.text == "系统提示":
         raise Exception("预期外异常")
     elif title_soup.text == "智慧东大":
@@ -76,7 +76,7 @@ def cas_login():
         # 预期格式: {"e":0,"m":"操作成功","d":{"info":{"name":"张三","xgh":"20230001","depart":"计算机学院"}}}
         if data.get('e') != 0:
             flash(f"CAS 认证失败: {data.get('m', '未知错误')}", 'error')
-            #return redirect(url_for('cas.cas_login'))
+            return redirect(url_for('cas.cas_login'))
 
         info = data.get('d', {}).get('info', {})
         real_name = info.get('name')
@@ -120,10 +120,8 @@ def cas_login():
     except requests.RequestException as e:
         current_app.logger.error(f"CAS 请求失败: {e}")
         flash('认证服务暂时不可用，请稍后再试', 'error')
-        print('认证服务暂时不可用，请稍后再试')
         return redirect(url_for('cas.cas_login'))
     except Exception as e:
         current_app.logger.exception("CAS 登录异常")
         flash(f'登录失败: {str(e)}', 'error')
-        print(f'登录失败: {str(e)}')
         return redirect(url_for('cas.cas_login'))
