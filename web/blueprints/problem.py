@@ -94,14 +94,14 @@ def show_problem_detail(pid):
                 })
         except Exception:
             print(format_exc())
-            flash('An error occured. Please contact admin.', 'error')
+            flash('出现了一个错误，请联系管理员。', 'error')
 
             with db_pool.connection() as conn:
                 conn.execute('UPDATE log_flag SET checker_msg = %s WHERE id = %s', [
                              format_exc(), submit_id])
         else:
             if res:
-                msg = checker_msg or 'Accepted. Congratulations!'
+                msg = checker_msg or 'Flag 正确，恭喜！'
                 flash(msg, 'success')
 
                 end_time = current_app.config['END_TIME']
@@ -113,7 +113,7 @@ def show_problem_detail(pid):
                         conn.execute('INSERT INTO accepted_submit(task_id, user_id, flag, flag_log_id) VALUES (%s, %s, %s, %s)', [
                                     task_id, g.user['id'], flag, submit_id])
             else:
-                msg = checker_msg or 'Incorrect flag.'
+                msg = checker_msg or 'Flag 错误'
                 flash(msg, 'warning')
 
             with db_pool.connection() as conn:

@@ -23,7 +23,7 @@
                 {% endif %}
 
                 {% if not g.user %}
-                <a class="ui item" href="{{url_for('user.show_login')}}">
+                <a class="ui item" href="{{url_for('cas.cas_login')}}">
                     <i class="user icon"></i>登录
                 </a>
                 {% else %}

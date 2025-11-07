@@ -246,7 +246,7 @@
                 <input type="text" name="flag" placeholder="请输入 Flag" required>
                 <button class="ui primary button" type="submit">提交</button>
                 {% else %}
-                    <input type="text" name="flag" placeholder="Accepted" style="background-color: honeydew; " disabled>
+                    <input type="text" name="flag" placeholder="已解出" style="background-color: honeydew; " disabled>
                     {% if g.is_admin %}
                     <div class="ui green button" onclick="window.location.href = '{{url_for('problem.reset_task_progress', pid=p.id, taskid=task.id)}}'">重置</div>
                     {% else %}

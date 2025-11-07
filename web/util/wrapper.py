@@ -8,7 +8,7 @@ def login_required(f):
             return f(*args, **kwargs)
         else:
             flash('请先登录！', 'warning')
-            return redirect(url_for('user.show_login', next=request.path))
+            return redirect(url_for('cas.cas_login', next=request.path))
     return decorated_function
 
 def admin_required(f):

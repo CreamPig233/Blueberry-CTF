@@ -6,7 +6,7 @@ from passlib.hash import bcrypt_sha256
 import json
 import secrets
 
-bp = Blueprint('cas', __name__, url_prefix='/cas')
+bp = Blueprint('cas', __name__, url_prefix='/user')
 
 def login_from_neucas(username: str, password: str):
     from bs4 import BeautifulSoup, Tag
@@ -56,7 +56,7 @@ def login_from_neucas(username: str, password: str):
         return login_result
 
 
-@bp.route('/login', methods=['GET', 'POST'])
+@bp.route('/logincas', methods=['GET', 'POST'])
 def cas_login():
     if request.method == 'GET':
         return render_template('user/logincas.html')

@@ -6,8 +6,8 @@ import json
 
 bp = Blueprint('user', __name__, url_prefix='/user')
 
-@bp.route('/login', methods=['GET', 'POST'])
-def show_login():
+@bp.route('/loginlocal', methods=['GET', 'POST'])
+def show_login_local():
     if request.method == 'GET':
         return render_template('user/login.html')
     
@@ -38,7 +38,7 @@ def show_login():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('user.show_login'))
+    return redirect(url_for('cas.cas_login'))
 
 @bp.route('/edit', methods=['GET', 'POST'])
 @login_required
@@ -120,7 +120,7 @@ def show_register():
             conn.execute('INSERT INTO user_info (username, email, password, extra_info) VALUES (%s, %s, %s, %s)', [cli_username, cli_email, bcrypt_sha256.hash(cli_password), extra])
             flash('Register OK, please login.', 'success')
             
-            return redirect(url_for('user.show_login'))
+            return redirect(url_for('user.show_login_local'))
 
 @bp.route('/<int:uid>')
 @login_required
