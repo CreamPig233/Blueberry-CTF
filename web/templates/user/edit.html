@@ -19,62 +19,22 @@
                 <td>{{g.user.username}}</td>
             </tr>
             <tr>
-                {% if config['USE_GRAVATAR'] == 'yes' %}
-                <td class="two wide"><a href="https://en.gravatar.com/">Gravatar</a></td>
-                {% else %}
-                <td class="two wide">头像</td>
-                {% endif %}
-                <td><img class="ui avatar image" src="{{avatar_url(g.user, 64)}}" alt="avatar"></td>
-            </tr>
-            <tr>
-                <td class="two wide">邮箱</td>
-                <td>{{g.user.email}}</td>
-            </tr>
-            <tr>
                 <td class="two wide">注册时间</td>
                 <td>{{g.user.register_time}}</td>
             </tr>
-
             <tr>
-                <td class="two wide">额外信息</td>
-                <td>{{g.user.extra_info}}</td>
+                <td class="two wide">学号</td>
+                <td>{{ user_display_info.get('xgh', 'None') }}</td>
             </tr>
+            <tr>
+                <td class="two wide">学院</td>
+                <td>{{ user_display_info.get('depart', 'None') }}</td>
+            </tr>     
 
         </tbody>
     </table>
 
-    <h2 class="ui header">
-        # 修改密码
-    </h2>
 
-    <form class="ui form" method="post" id="pwdform">
-        <div class="field">
-            <label>当前密码</label>
-            <input type="password" name="originpassword">
-        </div>
-        <div class="field">
-            <label>新密码</label>
-            <input type="password" name="newpassword" placeholder="至少 8 个字符">
-        </div>
-        <div class="field">
-            <label>确认新密码</label>
-            <input type="password" name="newpassword2" placeholder="至少 8 个字符">
-        </div>
-
-        <button class="ui button" type="submit">提交</button>
-    </form>
-
-    <script>
-        $('#pwdform')
-            .form({
-                fields: {
-                    originpassword: 'empty',
-                    newpassword: 'minLength[8]',
-                    newpassword2: 'minLength[8]'
-                }
-            })
-            ;
-    </script>
 
 </div>
 {% endblock %}

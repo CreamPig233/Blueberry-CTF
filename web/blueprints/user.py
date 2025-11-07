@@ -44,7 +44,28 @@ def logout():
 @login_required
 def show_edit():
     if request.method == 'GET':
-        return render_template('user/edit.html')
+        allowed_keys = {'xgh', 'depart', 'sex'}
+        displayed_info = {}
+
+        if g.user.get('extra_info'):
+            
+            
+            try:
+                extra_str = str(g.user.get('extra_info')).replace("'",'"').replace("False",'"FALSE"').replace("True",'"TRUE"')
+                print(extra_str)
+                
+                extra_dict = json.loads(extra_str)
+                
+                # 仅提取允许的键
+                print(type(extra_dict))
+                displayed_info = {
+                    key: extra_dict.get(key) for key in allowed_keys if key in extra_dict
+                }
+            except (ValueError, TypeError) as e:
+                print(e)
+                pass  # 解析失败则留空
+        print(displayed_info)
+        return render_template('user/edit.html', user_display_info=displayed_info)
     else:
         try:
             cli_origin = request.form.get('originpassword')
@@ -140,7 +161,27 @@ SELECT r.*, title FROM r JOIN problem ON r.problem_id = problem.id ORDER BY subm
         abort(403)
     
     info['register_time'] = info['register_time'].strftime('%Y/%m/%d')
-
+    
+    
+    
+    try:
+        extra_info = str(info.get('extra_info')).replace("'",'"').replace("False",'"FALSE"').replace("True",'"TRUE"')
+        if extra_info == '{}':
+            raise Exception
+        extra_info = json.loads(extra_info)
+    except Exception:
+        extra_info = json.loads('{"xgh":"None","depart":"None"}')
+    
+    
+    if len(extra_info['xgh']) == 8:
+        info['xgh'] = extra_info['xgh'][0:4]+"****"
+    elif len(extra_info['xgh']) == 7:
+        info['xgh'] = extra_info['xgh'][0:2]+"*****"
+    else:
+        info['xgh'] = extra_info['xgh']
+        
+    info['depart'] = extra_info['depart']
+    
     g.info = info
     g.solve_cnt = len(g.solves)
     g.total_point = sum(x['point'] for x in g.solves)

@@ -11,16 +11,14 @@
         <div class="ui row">
             <div class="four wide column">
                 <div class="ui card">
-                    <div class="image">
-                        <img src="{{avatar_url(u, 512)}}" alt="avatar">
-                    </div>
                     <div class="content">
                         <div class="header">{{u.username}}</div>
+                        <div class="meta"><br></div>
+                        <div class="meta">
+                            <span>{{u.depart}} - {{u.xgh}}</span>
+                        </div>
                         <div class="meta">
                             <span class="date">注册时间 {{u.register_time}}</span>
-                        </div>
-                        <div class="description">
-                            
                         </div>
                     </div>
                     <div class="extra content">
