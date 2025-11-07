@@ -1,6 +1,6 @@
 # web/blueprints/cas.py
 import requests
-from flask import Blueprint, request, flash, redirect, url_for, session, current_app, abort
+from flask import Blueprint, request, flash, redirect, url_for, session, current_app, abort, render_template
 from util.db import db_pool
 from passlib.hash import bcrypt_sha256
 import json
@@ -59,15 +59,7 @@ def login_from_neucas(username: str, password: str):
 @bp.route('/login', methods=['GET', 'POST'])
 def cas_login():
     if request.method == 'GET':
-        return '''
-        <form method="post">
-            <h3>CAS 统一认证登录</h3>
-            用户名: <input name="username" required><br><br>
-            密码: <input name="password" type="password" required><br><br>
-            <button type="submit">登录</button>
-        </form>
-        <a href="/">返回首页</a>
-        '''
+        return render_template('user/logincas.html')
 
     username = request.form.get('username', '').strip()
     password = request.form.get('password', '').strip()

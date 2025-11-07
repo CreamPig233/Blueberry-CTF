@@ -1,0 +1,28 @@
+<!-- templates/cas/login.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>CAS 登录</title>
+</head>
+<body>
+    <form method="post">
+        <h3>CAS 统一认证登录</h3>
+        用户名: <input name="username" required><br><br>
+        密码: <input name="password" type="password" required><br><br>
+        <button type="submit">登录</button>
+    </form>
+    <a href="{{ url_for('show_index') }}">返回首页</a>
+
+    <!-- 可选：显示 flash 消息 -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div style="color: {% if category == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
