@@ -4,9 +4,32 @@
 
 {% block basic %}
 
+<style>
+  .h2-with-image {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    justify-content: center; /* 水平居中（如果整个标题居中） */
+    gap: 12px; /* 文字和图片之间的间距 */
+    margin: 1.5em 0;
+  }
+
+  .h2-with-image img {
+    max-height: 1.4em;
+    width: auto;
+    vertical-align: middle;
+    transform: scale(1.2); /* 放大1.5倍 */
+    
+}
+
+    
+</style>
+
 <div class="ui text container">
-    <h2 class="ui header">
-        # 使用东北大学统一认证登录
+    
+    <h2 class="ui header h2-with-image">
+        使用
+        <img id="theme-login-img" style="margin-right: 0px;margin-top: 0px;max-height: 2em;width: auto;">
+        统一身份认证登录
     </h2>
     <form class="ui form" method="post" id="casloginform">
         <div class="field">
@@ -31,6 +54,22 @@
                     password: 'empty',
                 }
             });
+    </script>
+    <script>
+      function updateLoginImage() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const img = document.getElementById('theme-login-img');
+        // 使用 url_for 确保路径正确（Jinja 在服务端渲染路径）
+        img.src = isDark 
+            ? "{{ url_for('static', filename='img/neu-white.png') }}"
+            : "{{ url_for('static', filename='img/neu-color.png') }}";
+      }
+
+      // 初始化图片
+      document.addEventListener('DOMContentLoaded', updateLoginImage);
+
+      // 监听系统主题变化，实时切换图片
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateLoginImage);
     </script>
 </div>
 
