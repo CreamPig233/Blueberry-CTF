@@ -29,3 +29,7 @@ os.chdir('web')
 
 os.system('flask erase-db')
 os.system('flask init-db')
+
+print("PGSQL username: "+ 'postgres')
+print("PGSQL password: "+ pgsql_passwd)
+print("PGSQL database: "+ "blueberry")
