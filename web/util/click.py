@@ -252,15 +252,15 @@ def check(s):
                 [
                     ["site_name", "Blueberry CTF"],
                     ["message_board", "实力，我的**实力**！"],
-                    ["use_gravatar", "yes"],
-                    ["use_local_resources", "no"],
-                    ["is_allow_register", "yes"],
+                    ["use_gravatar", "no"],
+                    ["use_local_resources", "yes"],
+                    ["is_allow_register", "no"],
                     ["decay_lambda", "15"],
                     ["userinfo_extra_fields", "[]"],
                     ["start_time", ""],
                     ["end_time", ""],
                     ["head_tags", ""],
-                    ["player_max_container_num", "4"]
+                    ["player_max_container_num", "2"]
                 ],
             )
 

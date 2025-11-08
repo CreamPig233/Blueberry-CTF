@@ -36,7 +36,7 @@ def login_from_neucas(username: str, password: str):
         'execution': page['form_execution'],
         '_eventId': 'submit'
     }
-    login_result = session.post("https://pass.neu.edu.cn" + page['form_destination'], data=form_data, allow_redirects=True)  # 允许跳转
+    login_result = session.post("https://pass.neu.edu.cn" + page['form_destination'], data=form_data, allow_redirects=True, headers=headers)  # 允许跳转
     login_result_soup = BeautifulSoup(login_result.text, "html.parser")
     title_soup = login_result_soup.find("title")
 
