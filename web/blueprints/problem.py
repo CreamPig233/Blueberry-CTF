@@ -107,7 +107,7 @@ def show_problem_detail(pid):
                 end_time = current_app.config['END_TIME']
 
                 if end_time and datetime.now() > end_time:
-                    flash('Contest time exceeded :(', 'info')
+                    flash('比赛已结束 :(', 'info')
                 else:
                     with db_pool.connection() as conn:
                         conn.execute('INSERT INTO accepted_submit(task_id, user_id, flag, flag_log_id) VALUES (%s, %s, %s, %s)', [
