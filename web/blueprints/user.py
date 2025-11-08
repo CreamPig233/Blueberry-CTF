@@ -52,19 +52,15 @@ def show_edit():
             
             try:
                 extra_str = str(g.user.get('extra_info')).replace("'",'"').replace("False",'"FALSE"').replace("True",'"TRUE"')
-                print(extra_str)
-                
                 extra_dict = json.loads(extra_str)
                 
                 # 仅提取允许的键
-                print(type(extra_dict))
                 displayed_info = {
                     key: extra_dict.get(key) for key in allowed_keys if key in extra_dict
                 }
             except (ValueError, TypeError) as e:
-                print(e)
                 pass  # 解析失败则留空
-        print(displayed_info)
+            
         return render_template('user/edit.html', user_display_info=displayed_info)
     else:
         try:
